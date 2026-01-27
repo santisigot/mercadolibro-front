@@ -1,16 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-interface Product {
-  id: number;
-  title: string;
-  author?: string;
-  price: number;
-  originalPrice?: number;
-  discount?: number;
-  image: string;
-}
+import { FavoritesService, Product } from '../../services/favorites.service';
+import { CartService } from '../../services/cart.service';
 
 interface CarouselSlide {
   title: string;
@@ -32,6 +24,21 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentCategorySlide = 0;
   private carouselInterval: ReturnType<typeof setInterval> | null = null;
   private categoryCarouselInterval: ReturnType<typeof setInterval> | null = null;
+
+  private favoritesService = inject(FavoritesService);
+  private cartService = inject(CartService);
+
+  toggleFavorite(product: Product): void {
+    this.favoritesService.toggleFavorite(product);
+  }
+
+  isFavorite(productId: number): boolean {
+    return this.favoritesService.isFavorite(productId);
+  }
+
+  addToCart(product: Product): void {
+    this.cartService.addToCart(product);
+  }
 
   // Carousel slides
   carouselSlides: CarouselSlide[] = [
