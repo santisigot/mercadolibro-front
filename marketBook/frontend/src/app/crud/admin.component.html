@@ -1,0 +1,56 @@
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">Gestión de libros</p>
+  </div>
+
+  <div class="admin-grid">
+    <!-- Crear Libro -->
+    <div class="admin-card" routerLink="/admin/create">
+      <div class="card-icon create">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </div>
+      <h3>Crear Libro</h3>
+      <p>Agregar un nuevo libro al catálogo</p>
+    </div>
+
+    <!-- Listar Libros -->
+    <div class="admin-card" routerLink="/admin/read">
+      <div class="card-icon read">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+      </div>
+      <h3>Listar Libros</h3>
+      <p>Ver todos los libros registrados</p>
+    </div>
+
+    <!-- Editar Libro -->
+    <div class="admin-card" routerLink="/admin/update">
+      <div class="card-icon update">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+      </div>
+      <h3>Editar Libro</h3>
+      <p>Modificar información de libros</p>
+    </div>
+
+    <!-- Eliminar Libro -->
+    <div class="admin-card" routerLink="/admin/delete">
+      <div class="card-icon delete">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          <line x1="10" y1="11" x2="10" y2="17"/>
+          <line x1="14" y1="11" x2="14" y2="17"/>
+        </svg>
+      </div>
+      <h3>Eliminar Libro</h3>
+      <p>Borrar libros del catálogo</p>
+    </div>
+  </div>
+</div>

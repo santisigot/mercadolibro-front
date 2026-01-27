@@ -1,0 +1,72 @@
+@import './login.component.scss';
+
+/* Additional styles specific to registration */
+.auth-header {
+  h3 {
+    color: #b71c1c;
+  }
+}
+
+.password-strength {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.strength-bars {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.strength-bar {
+  height: 4px;
+  flex: 1;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  
+  &.active {
+    &.weak {
+      background-color: #dc3545;
+    }
+    
+    &.medium {
+      background-color: #ffc107;
+    }
+    
+    &.strong {
+      background-color: #28a745;
+    }
+  }
+}
+
+.strength-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: right;
+}
+
+.terms-link {
+  color: #c62828;
+  text-decoration: none;
+  font-weight: 500;
+  
+  &:hover {
+    color: #b71c1c;
+    text-decoration: underline;
+  }
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  
+  &:hover {
+    background-color: #ccc;
+    transform: none;
+    box-shadow: none;
+  }
+}

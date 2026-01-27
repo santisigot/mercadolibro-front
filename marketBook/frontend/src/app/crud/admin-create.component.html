@@ -1,0 +1,112 @@
+<div class="crud-container">
+  <div class="crud-header">
+    <button class="btn-back" (click)="goBack()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Volver
+    </button>
+    <h1>Crear Nuevo Libro</h1>
+    <p class="subtitle">Completa el formulario para agregar un libro al catálogo</p>
+  </div>
+
+  <!-- Success Message -->
+  <div class="alert alert-success" *ngIf="showSuccess">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    ¡Libro creado exitosamente!
+  </div>
+
+  <div class="form-container">
+    <form (ngSubmit)="onSubmit()" #createForm="ngForm">
+      <!-- ISBN -->
+      <div class="mb-3">
+        <label for="isbn" class="form-label">ISBN *</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="isbn" 
+          name="isbn"
+          [(ngModel)]="isbn"
+          placeholder="978-3-16-148410-0"
+          required
+        >
+        <small class="form-text">Código ISBN del libro</small>
+      </div>
+
+      <!-- Nombre -->
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre del Libro *</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="nombre" 
+          name="nombre"
+          [(ngModel)]="nombre"
+          placeholder="Ej: Cien años de soledad"
+          required
+        >
+      </div>
+
+      <!-- Editorial -->
+      <div class="mb-3">
+        <label for="editorial" class="form-label">Editorial *</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="editorial" 
+          name="editorial"
+          [(ngModel)]="editorial"
+          placeholder="Ej: Editorial Sudamericana"
+          required
+        >
+      </div>
+
+      <!-- Idioma -->
+      <div class="mb-3">
+        <label for="idioma" class="form-label">Idioma *</label>
+        <select 
+          class="form-select" 
+          id="idioma" 
+          name="idioma"
+          [(ngModel)]="idioma"
+          required
+        >
+          <option *ngFor="let lang of idiomas" [value]="lang">{{ lang }}</option>
+        </select>
+      </div>
+
+      <!-- Descripción -->
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción *</label>
+        <textarea 
+          class="form-control" 
+          id="descripcion" 
+          name="descripcion"
+          [(ngModel)]="descripcion"
+          rows="4"
+          placeholder="Descripción del libro..."
+          required
+        ></textarea>
+        <small class="form-text">Máximo 500 caracteres</small>
+      </div>
+
+      <!-- Buttons -->
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/>
+            <polyline points="7 3 7 8 15 8"/>
+          </svg>
+          Guardar Libro
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="goBack()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: marketbook_postgres
+    environment:
+      POSTGRES_USER: marketbook_user
+      POSTGRES_PASSWORD: marketbook_password
+      POSTGRES_DB: marketbook_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

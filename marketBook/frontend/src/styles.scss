@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Custom Red Theme Utilities for when Bootstrap is not enough */
+.text-primary-red {
+  color: #c62828 !important;
+}
+
+.bg-primary-red {
+  background-color: #c62828 !important;
+}

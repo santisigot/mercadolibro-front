@@ -1,0 +1,31 @@
+@import './admin-create.component.scss';
+
+/* Additional styles for update page */
+.book-selector {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px dashed #e0e0e0;
+}
+
+.form-divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+  margin: 2rem 0;
+}
+
+.empty-selection {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #999;
+  
+  svg {
+    color: #ddd;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1rem;
+    margin: 0;
+  }
+}

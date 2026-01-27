@@ -1,0 +1,57 @@
+<div class="crud-container">
+  <div class="crud-header">
+    <button class="btn-back" (click)="goBack()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Volver
+    </button>
+    <h1>Listado de Libros</h1>
+    <p class="subtitle">Todos los libros registrados en el catálogo</p>
+  </div>
+
+  <div class="table-container">
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="books.length === 0">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      </svg>
+      <h3>No hay libros registrados</h3>
+      <p>Comienza agregando libros al catálogo</p>
+      <button class="btn btn-primary" routerLink="/admin/create">
+        Crear Primer Libro
+      </button>
+    </div>
+
+    <!-- Books Table -->
+    <div class="table-responsive" *ngIf="books.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ISBN</th>
+            <th>Nombre</th>
+            <th>Editorial</th>
+            <th>Idioma</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td class="isbn">{{ book.isbn }}</td>
+            <td class="nombre">{{ book.nombre }}</td>
+            <td>{{ book.editorial }}</td>
+            <td>
+              <span class="badge">{{ book.idioma }}</span>
+            </td>
+            <td class="descripcion">{{ book.descripcion }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="table-footer">
+        <p>Total de libros: <strong>{{ books.length }}</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
