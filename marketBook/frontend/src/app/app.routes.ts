@@ -9,15 +9,30 @@ import { RegisterComponent } from './login/register.component';
 import { ForgotPasswordComponent } from './login/forgot-password.component';
 import { UpdatePasswordComponent } from './login/update-password.component';
 import { HomeComponent } from './pages/home/home.component';
-import { FavoritesComponent } from './pages/favorites/favorites.component';
-import { CartComponent } from './pages/cart/cart.component';
 import { BookListingComponent } from './pages/book-listing/book-listing.component';
 
 export const appRoutes: Route[] = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'favorites', component: FavoritesComponent },
-  { path: 'cart', component: CartComponent },
+  {
+    path: 'favorites',
+    loadComponent: () =>
+      import('./pages/favorites/favorites.component').then(
+        (m) => m.FavoritesComponent
+      ),
+  },
+  {
+    path: 'cart',
+    loadComponent: () =>
+      import('./pages/cart/cart.component').then((m) => m.CartComponent),
+  },
+  {
+    path: 'product/:id',
+    loadComponent: () =>
+      import('./pages/product-detail/product-detail.component').then(
+        (m) => m.ProductDetailComponent
+      ),
+  },
   { path: 'destacados', component: BookListingComponent },
   { path: 'mas-vendidos', component: BookListingComponent },
   { path: 'nuevos', component: BookListingComponent },

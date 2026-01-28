@@ -4,9 +4,10 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { ToastComponent } from './shared/toast/toast.component';
 
 @Component({
-  imports: [RouterModule, HeaderComponent, FooterComponent, CommonModule],
+  imports: [RouterModule, HeaderComponent, FooterComponent, CommonModule, ToastComponent],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',

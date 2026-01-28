@@ -11,6 +11,7 @@ interface CarouselSlide {
   buttonText: string;
   badge: string;
   gradient: string;
+  link: string;
 }
 
 @Component({
@@ -40,31 +41,38 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.cartService.addToCart(product);
   }
 
+  isInCart(productId: number): boolean {
+    return this.cartService.isInCart(productId);
+  }
+
   // Carousel slides
   carouselSlides: CarouselSlide[] = [
     {
       badge: 'Nuevo Lanzamiento',
       title: 'Descubre Nuevos Mundos',
       subtitle: 'La colección más esperada del año ya está aquí. Historias que te transportarán a lugares increíbles.',
-      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=500&h=700&fit=crop',
+      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=510&h=710&fit=crop',
       buttonText: 'Explorar Ahora',
-      gradient: 'linear-gradient(135deg, #c62828 0%, #d32f2f 50%, #e53935 100%)'
+      gradient: 'linear-gradient(135deg, #c62828 0%, #d32f2f 50%, #e53935 100%)',
+      link: '/destacados'
     },
     {
       badge: 'Bestseller',
       title: 'Los Más Vendidos',
       subtitle: 'Únete a millones de lectores que ya disfrutan de estas increíbles historias.',
-      image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500&h=700&fit=crop',
+      image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=510&h=710&fit=crop',
       buttonText: 'Ver Colección',
-      gradient: 'linear-gradient(135deg, #b71c1c 0%, #c62828 50%, #d32f2f 100%)'
+      gradient: 'linear-gradient(135deg, #b71c1c 0%, #c62828 50%, #d32f2f 100%)',
+      link: '/mas-vendidos'
     },
     {
-      badge: 'Oferta Especial',
-      title: 'Hasta 40% de Descuento',
+      badge: 'Ofertas Especiales',
+      title: 'Grandes Descuentos',
       subtitle: 'Aprovecha nuestras ofertas exclusivas en los mejores títulos del momento.',
-      image: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=500&h=700&fit=crop',
-      buttonText: 'Ver Ofertas',
-      gradient: 'linear-gradient(135deg, #8b1a1a 0%, #b71c1c 50%, #c62828 100%)'
+      image: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=510&h=710&fit=crop',
+      buttonText: '',
+      gradient: 'linear-gradient(135deg, #8b1a1a 0%, #b71c1c 50%, #c62828 100%)',
+      link: '/mas-vendidos'
     }
   ];
 

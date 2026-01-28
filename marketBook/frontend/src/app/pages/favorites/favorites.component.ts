@@ -23,11 +23,17 @@ export class FavoritesComponent implements OnInit {
   }
 
   removeFavorite(productId: number): void {
-    this.favoritesService.removeFavorite(productId);
+    if (confirm('¿Estás seguro de que deseas quitar este libro de tus favoritos?')) {
+      this.favoritesService.removeFavorite(productId);
+    }
   }
 
   addToCart(product: Product): void {
     this.cartService.addToCart(product);
+  }
+
+  isInCart(productId: number): boolean {
+    return this.cartService.isInCart(productId);
   }
 
   formatPrice(price: number): string {

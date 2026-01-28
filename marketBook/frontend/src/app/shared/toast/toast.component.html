@@ -1,0 +1,22 @@
+<div class="toast-container" aria-live="polite">
+  <div 
+    class="toast-item" 
+    *ngFor="let toast of toasts" 
+    [class]="toast.type"
+    (click)="removeToast(toast.id)"
+    role="alert"
+    tabindex="0"
+    (keyup.enter)="removeToast(toast.id)"
+    (keyup.space)="removeToast(toast.id)"
+  >
+    <div class="toast-icon">
+      <i class="fas fa-check-circle" *ngIf="toast.type === 'success'"></i>
+      <i class="fas fa-exclamation-circle" *ngIf="toast.type === 'error'"></i>
+      <i class="fas fa-info-circle" *ngIf="toast.type === 'info'"></i>
+    </div>
+    <div class="toast-content">
+      <p>{{ toast.message }}</p>
+    </div>
+    <button class="toast-close">&times;</button>
+  </div>
+</div>

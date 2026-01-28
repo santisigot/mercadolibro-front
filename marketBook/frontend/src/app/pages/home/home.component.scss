@@ -611,7 +611,7 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
-  &.btn-favorite:hover {
+  &.btn-favorite:hover, &.btn-favorite.active {
     background: #c62828;
 
     svg {
@@ -620,13 +620,19 @@ h1 {
     }
   }
 
-  &.btn-add-to-cart:hover {
+  &.btn-add-to-cart:hover, &.btn-add-to-cart.active {
     background: #c62828;
 
     svg {
       color: white;
+      fill: white;
     }
   }
+}
+
+.btn-add-cart.active {
+  background: #c62828;
+  color: white;
 }
 
 .badge-discount {

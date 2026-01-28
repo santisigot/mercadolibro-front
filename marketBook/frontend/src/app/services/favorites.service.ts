@@ -1,5 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { NotificationService } from './notification.service';
+
+export interface Review {
+  user: string;
+  avatar?: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
 
 export interface Product {
   id: number;
@@ -10,12 +19,21 @@ export interface Product {
   discount?: number;
   image: string;
   badge?: string;
+  isbn?: string;
+  publicationDate?: string;
+  editorial?: string;
+  language?: string;
+  description?: string;
+  rating?: number;
+  reviewsCount?: number;
+  reviews?: Review[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritesService {
+  private notificationService = inject(NotificationService);
   private favoritesSubject = new BehaviorSubject<Product[]>([]);
   favorites$ = this.favoritesSubject.asObservable();
 
@@ -39,6 +57,7 @@ export class FavoritesService {
       const updatedFavorites = [...currentFavorites, product];
       this.favoritesSubject.next(updatedFavorites);
       this.saveToStorage(updatedFavorites);
+      this.notificationService.show(`"${product.title}" agregado a favoritos`, 'success');
     }
   }
 

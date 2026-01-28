@@ -1,0 +1,155 @@
+<div class="product-detail-page">
+  <div class="container" *ngIf="product">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+      <a routerLink="/home">Inicio</a>
+      <span class="separator">/</span>
+      <a [routerLink]="['/product', product.id]">{{ product.title }}</a>
+    </nav>
+
+    <div class="product-main-grid">
+      <!-- Image Gallery Section -->
+      <div class="image-section">
+        <div class="main-image-card">
+          <div class="badge-overlay" *ngIf="product.badge">{{ product.badge }}</div>
+          <img [src]="product.image" [alt]="product.title">
+        </div>
+      </div>
+
+      <!-- General Info Section -->
+      <div class="info-section">
+        <h1 class="product-title">{{ product.title }}</h1>
+        <p class="product-author">por <span>{{ product.author }}</span></p>
+
+        <div class="rating-summary">
+          <div class="stars">
+            <i class="fas fa-star" *ngFor="let star of getStars(product.rating)" [class.active]="star"></i>
+          </div>
+          <span class="rating-text">{{ product.rating }}</span>
+          <span class="reviews-count">({{ product.reviewsCount }} reseñas)</span>
+        </div>
+
+        <div class="price-box">
+          <div class="price-row">
+            <span class="current-price">{{ product.price | currency:'ARS ':'symbol':'1.0-0' }}</span>
+            <span class="old-price" *ngIf="product.originalPrice">{{ product.originalPrice | currency:'ARS ':'symbol':'1.0-0' }}</span>
+            <span class="discount-badge" *ngIf="product.discount">-{{ product.discount }}%</span>
+          </div>
+          <p class="stock-info"><i class="fas fa-check-circle"></i> En stock disponible</p>
+        </div>
+
+        <div class="actions">
+          <button 
+            class="btn-cart" 
+            [class.active]="isInCart()"
+            (click)="addToCart()"
+          >
+            <i class="fas fa-shopping-cart"></i>
+            {{ isInCart() ? 'En el Carrito' : 'Agregar al Carrito' }}
+          </button>
+          <button class="btn-favorite" (click)="toggleFavorite()" [class.active]="isFavorite()">
+            <i [class]="isFavorite() ? 'fas fa-heart' : 'far fa-heart'"></i>
+          </button>
+        </div>
+
+        <div class="features-brief">
+          <div class="feature">
+            <i class="fas fa-truck"></i>
+            <span>Envío Gratis</span>
+          </div>
+          <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <span>Compra Protegida</span>
+          </div>
+          <div class="feature">
+            <i class="fas fa-undo"></i>
+            <span>Devolución Gratis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details and Reviews Section -->
+    <div class="tabs-container">
+      <div class="tabs-header">
+        <button [class.active]="activeTab === 'info'" (click)="activeTab = 'info'">Descripción e Información</button>
+        <button [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Reseñas de Usuarios</button>
+      </div>
+
+      <div class="tab-content">
+        <!-- Info Tab -->
+        <div class="info-tab" *ngIf="activeTab === 'info'">
+          <div class="description-block">
+            <h3>Sobre este libro</h3>
+            <p>{{ product.description }}</p>
+          </div>
+
+          <div class="technical-table">
+            <h3>Detalles del producto</h3>
+            <div class="grid">
+              <div class="detail-item">
+                <span class="label">ISBN-13</span>
+                <span class="value">{{ product.isbn }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Fecha de publicación</span>
+                <span class="value">{{ product.publicationDate }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Editorial</span>
+                <span class="value">{{ product.editorial }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Idioma</span>
+                <span class="value">{{ product.language }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Tab -->
+        <div class="reviews-tab" *ngIf="activeTab === 'reviews'">
+          <div class="reviews-summary-large" *ngIf="product.rating">
+            <div class="score-box">
+              <span class="big-score">{{ product.rating }}</span>
+              <div class="stars">
+                <i class="fas fa-star" *ngFor="let star of getStars(product.rating)" [class.active]="star"></i>
+              </div>
+              <p>Basado en {{ product.reviewsCount }} opiniones</p>
+            </div>
+          </div>
+
+          <div class="reviews-list">
+            <div class="review-item" *ngFor="let review of product.reviews">
+              <div class="review-header">
+                <div class="user-info">
+                  <div class="avatar" *ngIf="review.avatar"><img [src]="review.avatar" alt=""></div>
+                  <div class="avatar-placeholder" *ngIf="!review.avatar">{{ review.user.charAt(0) }}</div>
+                  <div class="name-date">
+                    <span class="user-name">{{ review.user }}</span>
+                    <span class="review-date">{{ review.date }}</span>
+                  </div>
+                </div>
+                <div class="stars">
+                  <i class="fas fa-star" *ngFor="let star of getStars(review.rating)" [class.active]="star"></i>
+                </div>
+              </div>
+              <p class="review-comment">{{ review.comment }}</p>
+            </div>
+
+            <div class="no-reviews" *ngIf="!product.reviews || product.reviews.length === 0">
+              <p>Todavía no hay reseñas para este producto. ¡Sé el primero en comentar!</p>
+              <button class="btn-outline">Escribir una reseña</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container error-state" *ngIf="!product">
+    <h2>Producto no encontrado</h2>
+    <p>Lo sentimos, el producto que buscas no existe o ha sido retirado.</p>
+    <button routerLink="/home" class="btn-primary">Volver al inicio</button>
+  </div>
+</div>

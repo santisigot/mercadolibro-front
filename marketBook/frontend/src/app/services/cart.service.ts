@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from './favorites.service';
+import { NotificationService } from './notification.service';
 
 export interface CartItem extends Product {
   quantity: number;
 }
-
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  private notificationService = inject(NotificationService);
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
   cart$ = this.cartSubject.asObservable();
 
@@ -26,6 +27,10 @@ export class CartService {
     return this.cartSubject.value;
   }
 
+  isInCart(productId: number): boolean {
+    return this.getCartItems().some((item) => item.id === productId);
+  }
+
   addToCart(product: Product): void {
     const currentItems = this.getCartItems();
     const existingItem = currentItems.find((item) => item.id === product.id);
@@ -39,6 +44,7 @@ export class CartService {
       this.cartSubject.next(updatedItems);
     }
     this.saveToStorage(this.getCartItems());
+    this.notificationService.show(`"${product.title}" agregado al carrito`, 'success');
   }
 
   removeFromCart(productId: number): void {

@@ -27,7 +27,9 @@ export class CartComponent implements OnInit {
   }
 
   removeItem(productId: number): void {
-    this.cartService.removeFromCart(productId);
+    if (confirm('¿Estás seguro de que deseas eliminar este libro del carrito?')) {
+      this.cartService.removeFromCart(productId);
+    }
   }
 
   updateQuantity(productId: number, quantity: number): void {

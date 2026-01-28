@@ -81,6 +81,10 @@ export class BookListingComponent implements OnInit {
     this.cartService.addToCart(product);
   }
 
+  isInCart(productId: number): boolean {
+    return this.cartService.isInCart(productId);
+  }
+
   formatPrice(price: number): string {
     return `$${price.toLocaleString('es-AR')}`;
   }
